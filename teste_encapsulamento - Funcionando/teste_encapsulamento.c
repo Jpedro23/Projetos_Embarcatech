@@ -5,7 +5,6 @@
 #include "botao.h"
 #include "calculo.h"
 
-// Testando integração com o Git
 
 int main()
 {
