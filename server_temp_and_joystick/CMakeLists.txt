@@ -55,8 +55,8 @@ src/joystick.c
 src/wifi.c
 src/read_temp.c
 )
-set(WIFI_SSID "Joao")
-set(WIFI_PASSWORD "jao123456")
+set(WIFI_SSID "073AFibra 2.4Ge5G")
+set(WIFI_PASSWORD "dCz6pRQ5")
 target_compile_definitions(picow_http_client PRIVATE
         WIFI_SSID=\"${WIFI_SSID}\"
         WIFI_PASSWORD=\"${WIFI_PASSWORD}\"

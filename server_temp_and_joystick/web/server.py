@@ -76,6 +76,26 @@ def direction():
     socketio.emit('nova_direcao', {'direction': direction})
 
     return jsonify({'status': 'ok', 'direction': direction})
+
+# ------------------------------------- Rota de estado do botão -------------------------------------
+
+@app.route('/pressed_button_a', methods=['GET','POST'])
+def pressed_button_a():
+    print("Comando: butão_a_precionado")
+    socketio.emit('command', {'action':'pressed_button_a'}) 
+    return 'pressed_button_a command sent', 200
+
+@app.route('/pressed_button_b', methods=['GET','POST'])
+def pressed_button_b():
+    print("Comando: butão_b_precionado")
+    socketio.emit('command', {'action':'pressed_button_b'}) 
+    return 'pressed_button_b command sent', 200
+
+@app.route('/unpressed', methods=['GET','POST'])
+def unpressed():
+    print("\n------------- Nenhum botão pressionado -------------\n")
+    socketio.emit('command',{'action':'unpressed'})
+    return 'unpressed command sent',200
     
 # Ponto de entrada principal da aplicação
 if __name__ == '__main__':

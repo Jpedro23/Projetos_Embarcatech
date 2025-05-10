@@ -23,12 +23,22 @@ body {
     width: 100%;
 }
 
-.temp_templat,
+.temp_templat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .direction_templat {
     flex: 1 1 400px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    justify-content: center;
 }
 
 .temperature-button {
@@ -187,4 +197,42 @@ body {
 .control-btn:hover {
     background-color: white;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button_action {
+    background: linear-gradient(135deg, #4ade80, #22c55e); /* Verde vibrante */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button_action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+}
+
+.button_action:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-container{
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }

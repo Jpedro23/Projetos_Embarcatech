@@ -112,9 +112,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+
+
+
 // 🔌 Conecta com o servidor via WebSocket
 const socket = io();
 
 socket.on('nova_direcao', function (data) {
     updatePointerFromDirection(data.direction);
+});
+
+// Exeuta o sistema de verificação de estado do botão a e botão b
+
+const physicalButton = document.getElementById('physicalButton');
+
+function atualizarStatus(texto) {
+  physicalButton.textContent = texto;
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') atualizarStatus('Seta Esquerda Pressionada');
+});
+
+
+socket.on('command', (data) => {
+  if (data.action === 'pressed_button_a') atualizarStatus('Butão_A_Pressionado'); 
+  if (data.action === 'pressed_button_b') atualizarStatus('Butão_B_Pressionado'); 
+  if (data.action === 'unpressed') atualizarStatus('Solto'); 
 });

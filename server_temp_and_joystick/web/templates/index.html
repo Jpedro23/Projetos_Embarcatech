@@ -12,15 +12,21 @@
 <body>
     <div class="main_content">
         <div class="temp_templat">
-            <div class="container mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-screen">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-3 text-center">Monitoramento do estado do botão</h2>
+            <div id="physicalButton" class="button_action">Estado do Botão</div>
+            <div class="custom-container">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-3 text-center">Sensor de Temperatura</h1>
-                <h2 class="text-xl md:text-2xl text-gray-600 mb-12 text-center">Atualiza as mensagens a cada 3 segundos...</h2>
-                <h2 class="text-xl md:text-2xl text-gray-600 mb-4 text-center" id="status-message">Conectando ao sensor...</h2>
+                <h2 class="text-xl md:text-2xl text-gray-600 mb-12 text-center">Atualiza as mensagens a cada 3
+                    segundos...</h2>
+                <h2 class="text-xl md:text-2xl text-gray-600 mb-4 text-center" id="status-message">Conectando ao
+                    sensor...</h2>
 
-                <div id="temperature-container" class="temperature-button bg-white rounded-2xl p-8 w-64 h-64 flex flex-col items-center justify-center cursor-pointer">
+                <div id="temperature-container"
+                    class="temperature-button bg-white rounded-2xl p-8 w-64 h-64 flex flex-col items-center justify-center cursor-pointer">
                     <div class="text-gray-500 mb-2 text-lg">Temperatura atual:</div>
                     <div id="temperature" class="temperature-value text-6xl font-bold">0.0°</div>
-                    <div class="text-gray-400 mt-4 text-sm">Última atualização: <span id="last-update">--:--:--</span></div>
+                    <div class="text-gray-400 mt-4 text-sm">Última atualização: <span id="last-update">--:--:--</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,7 +57,8 @@
                     <div class="direction northwest">NW</div>
 
                     <!-- Ponteiro da bússola -->
-                    <div class="compass-pointer" id="compassPointer" style="transform: translateX(-50%) translateY(-100%) rotate(0deg);"></div>
+                    <div class="compass-pointer" id="compassPointer"
+                        style="transform: translateX(-50%) translateY(-100%) rotate(0deg);"></div>
 
                     <!-- Centro da bússola -->
                     <div class="compass-center">
@@ -73,8 +80,8 @@
     <!-- --------------------- Sepração da dive referente a rosa dos ventos ---------------------  -->
 
     <!-- Script de atualização -->
-    <script src="/static/script.js"></script>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="/static/script.js"></script>
 </body>
 
 </html>

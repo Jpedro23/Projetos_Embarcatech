@@ -13,13 +13,14 @@
 #include "wifi.h"
 #include "read_temp.h"
 
-#define HOST "192.168.156.71"
+#define HOST "192.168.100.21"
 #define PORT 5000
 #define INTERVALO_MS 50
 #define BUTTON_LEFT 5
 #define BUTTON_RIGHT 6
 #define LED_BLUE 12
 #define LED_RED 13
+#define LED_GREEN 11
 
 #define ADC_Y 0 // ADC0 = GP26
 #define ADC_X 1 // ADC1 = GP27
@@ -58,15 +59,18 @@ int main()
     gpio_init(LED_RED);
     gpio_set_dir(LED_RED, GPIO_OUT);
 
+    gpio_init(LED_GREEN);
+    gpio_set_dir(LED_GREEN, GPIO_OUT);
+
     adc_gpio_init(26); // GP26 = eixo Y
     adc_gpio_init(27); // GP27 = eixo X
-    
-    
+
     // =================== Iniciação da comunição wi-fi ======================
-    
+
     printf("\nIniciando cliente HTTP...\n");
 
-    if (iniciar_wifi(WIFI_SSID, WIFI_PASSWORD) != 0) {
+    if (iniciar_wifi(WIFI_SSID, WIFI_PASSWORD) != 0)
+    {
         return 1; // Erro de conexão...
     }
 
@@ -78,9 +82,15 @@ int main()
         char temp_path[128];
         snprintf(temp_path, sizeof(temp_path), "/temperature?value=%.2f", temperature);
 
-        gpio_put(LED_BLUE, 1);
-        sleep_ms(100);
-        gpio_put(LED_BLUE, 0);
+        EXAMPLE_HTTP_REQUEST_T temp_req = {0};
+        temp_req.hostname = HOST;
+        temp_req.url = temp_path;
+        temp_req.port = PORT;
+        temp_req.headers_fn = http_client_header_print_fn;
+        temp_req.recv_fn = http_client_receive_print_fn;
+
+        printf("Enviando temperatura: %s\n", temp_path);
+        http_client_request_sync(cyw43_arch_async_context(), &temp_req);
 
 
         adc_select_input(ADC_Y);
@@ -102,16 +112,38 @@ int main()
             snprintf(direction_path, sizeof(direction_path), "/direction?dir=%s", direcao);
             path = direction_path;
             gpio_put(LED_RED, 1);
-            sleep_ms(100);
+            sleep_ms(50);
             gpio_put(LED_RED, 0);
         }
-        else
+
+        else if (gpio_get(BUTTON_LEFT) == 0)
         {
-            path = temp_path;
-            sleep_ms(100);
+            path = "/pressed_button_a";
+            gpio_put(LED_BLUE, 1);
+            gpio_put(LED_GREEN, 1);
+            sleep_ms(50);
+            gpio_put(LED_BLUE, 0);
+            gpio_put(LED_GREEN, 0);
         }
-    
-      // =================== IF que constroi o path que sera mandado para a rota do servirdor ======================
+
+        else if (gpio_get(BUTTON_RIGHT) == 0)
+        {
+            path = "/pressed_button_b";
+            gpio_put(LED_BLUE, 1);
+            gpio_put(LED_RED, 1);
+            sleep_ms(50);
+            gpio_put(LED_BLUE, 0);
+            gpio_put(LED_RED, 0);
+        }
+
+        else if (gpio_get(BUTTON_RIGHT) != 0 && gpio_get(BUTTON_LEFT) != 0)
+        {
+            path = "/unpressed";
+            sleep_ms(50);
+        }
+
+
+        // =================== IF que constroi o path que sera mandado para a rota do servirdor ======================
 
         if (path != NULL)
         {
@@ -134,7 +166,7 @@ int main()
                 printf("Erro ao enviar comando: %d\n", result);
             }
 
-            sleep_ms(100);
+            sleep_ms(50);
         }
 
         sleep_ms(INTERVALO_MS);
