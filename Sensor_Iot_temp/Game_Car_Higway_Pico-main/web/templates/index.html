@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor de Temperatura</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="container mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-screen">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-3 text-center">Sensor de Temperatura</h1>
+        <h2 class="text-xl md:text-2xl text-gray-600 mb-12 text-center">Atualiza as mensagens a cada 3 segundos...</h2>
+        <h2 class="text-xl md:text-2xl text-gray-600 mb-4 text-center" id="status-message">Conectando ao sensor...</h2>
+
+        <div id="temperature-container"
+            class="temperature-button bg-white rounded-2xl p-8 w-64 h-64 flex flex-col items-center justify-center cursor-pointer">
+            <div class="text-gray-500 mb-2 text-lg">Temperatura atual:</div>
+            <div id="temperature" class="temperature-value text-6xl font-bold">0.0°</div>
+            <div class="text-gray-400 mt-4 text-sm">Última atualização: <span id="last-update">--:--:--</span></div>
+        </div>
+    </div>
+
+    <!-- Script de atualização -->
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
