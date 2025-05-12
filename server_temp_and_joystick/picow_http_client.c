@@ -13,7 +13,7 @@
 #include "wifi.h"
 #include "read_temp.h"
 
-#define HOST "192.168.100.21"
+#define HOST "192.168.137.199"
 #define PORT 5000
 #define INTERVALO_MS 50
 #define BUTTON_LEFT 5
