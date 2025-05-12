@@ -21,8 +21,11 @@ O projeto foi organizado em três partes principais:
 
 ```
 /include        ← Arquivos de cabeçalho (.h)
+
 /src            ← Código-fonte implementado (.c)
+
 teste_encapsulamento.c ← Arquivo principal (main)
+
 ```
 
 ---
